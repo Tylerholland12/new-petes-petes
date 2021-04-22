@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    
+  .row.justify-content-center
+    .col-sm-6
+      legend New Pet
+      form(action="#", id="new-pet")
+        .form-group
+            label Name*
+            input.form-control(name="name" required)
+        .form-group
+            label Birthday*
+            input.form-control(name="birthday" required)
+        .form-group
+            label Species*
+            input.form-control(name="species" required)
+        .form-group
+            label Avatar*
+            input.form-control(name="avatar" type="file" required)
+        .form-group
+            label Favorite Food*
+            input.form-control(name="favoriteFood" required) 
+        .form-group
+            label Price*
+            textarea.form-control(name="price" required type="number")
+        .form-group
+            label Description*
+            textarea.form-control(name="description" required minlength="140")   
+        button(type="submit").btn.btn-primary Save

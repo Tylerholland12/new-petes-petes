@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  .row
+    .col-sm-4
+      if pet.avatarUrl
+        img.card-img-top(src=pet.avatarUrl + '-square.', alt='Card image cap')
+      else
+        img.card-img-top(src=pet.picUrlSq, alt='Card image cap')
+    .col-sm-8
+      h1=pet.name
+      p=pet.species
+      p Born on #{pet.birthday}
+      p=pet.description
+      .text-right
+        a(href="/pets/" + pet.id + "/edit").btn-link Edit
+      form(action=`/pets/${pet._id}/purchase`, method='POST')
+          script.stripe-button(src='https://checkout.stripe.com/checkout.js',
+          data-key=PUBLIC_STRIPE_API_KEY,
+          data-amount=pet.price*100,
+          data-name="Proud Pete's Pet Emporium",
+          data-description='Widget',
+          data-image='https://stripe.com/img/documentation/checkout/marketplace.png',
+          data-locale='auto',
+          data-zip-code='true')
+          input.form-control(type="hidden" value=pet._id name="petId")
+      

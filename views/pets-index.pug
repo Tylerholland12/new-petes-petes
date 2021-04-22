@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  .row
+    each pet, index in pets
+      .col-sm-4.justify-content-center
+        .card
+          if pet.avatarUrl
+            img.card-img-top(src=pet.avatarUrl + '-standard.', alt='Card image cap')
+          else
+            img.card-img-top(src=pet.picUrl, alt='Card image cap')
+          .card-body
+            h4.card-title= pet.name
+            small.text-muted= pet.species
+            p.card-text= pet.description
+            .text-right
+                a.card-link(href=`/pets/${pet._id}`) View #{pet.name}
+  ul.pagination
+    if currentPage > 1
+
+      li.page-item
+        if term
+          a.page-link(href=`?term=${term}&page=${currentPage - 1}`) Previous
+        else
+          a.page-link(href=`?page=${currentPage - 1}`) Previous
+
+    - var i = 1;
+    while i <= pagesCount
+      li.page-item
+        if term
+          a.page-link(href=`?term=${term}&page=${i}`)= i++
+        else
+          a.page-link(href=`?page=${i}`)= i++
+
+    if currentPage < pagesCount
+      li.page-item
+        if term
+          a.page-link(href=`?term=${term}&page=${parseInt(currentPage) + 1}`) Next
+        else
+          a.page-link(href=`?page=${parseInt(currentPage) + 1}`) Next
